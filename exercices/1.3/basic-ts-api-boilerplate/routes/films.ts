@@ -50,4 +50,15 @@ router.get("/:id", (req, res) => {
   return res.json(film);
 });
 
+router.get("/", (req, res) => {
+  if (!req.query["minimum-duration"]) {
+    return res.json(films);
+  }
+  const minimumDuration = Number(req.query["minimum-duration"]);
+  const filteredFilms = films.filter((film) => {
+    return film.duration <= minimumDuration;
+  });
+  return res.json(filteredFilms);
+});
+
 export default router;
