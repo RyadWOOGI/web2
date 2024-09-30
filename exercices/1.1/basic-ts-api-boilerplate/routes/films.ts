@@ -32,7 +32,7 @@ const films: Film[] = [
         description: 'Le film raconte l’histoire de Paul Edgecomb, un gardien-chef dans le couloir de la mort d’une prison en 1935. Sa vie change radicalement lorsqu’il rencontre John Coffey, un détenu condamné à mort pour le meurtre de deux jeunes filles. Coffey se révèle être un homme doux et doté de pouvoirs surnaturels, capable de guérir les malades et de faire des miracles. À travers cette rencontre, Paul et ses collègues sont confrontés à des dilemmes moraux et à des événements extraordinaires qui bouleversent leur quotidien12.',
         imageUrl: 'https://example.com/???.jpg'
     }
-]
+];
 
 router.get("/", (_req, res) => {
     return res.json(films);
