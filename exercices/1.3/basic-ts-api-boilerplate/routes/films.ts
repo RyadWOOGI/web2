@@ -86,6 +86,11 @@ router.post("/", (req, res) => {
 
   const { title, director, duration, budget, description, imageUrl } = body as NewFilm;
 
+  const filmExist = films.find((film) => film.title === title && film.director === director);
+  if(filmExist) {
+    return res.sendStatus(409);
+  }
+
   const nextId = films.reduce((maxId, film) => (film.id > maxId ? film.id : maxId), 0) + 1;
 
   const NewFilm: Film = {
