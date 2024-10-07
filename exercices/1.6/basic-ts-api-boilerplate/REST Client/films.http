@@ -21,3 +21,24 @@ Content-Type: application/json
     "description": "L'histoire suit Ok-ju, une ancienne garde du corps qui cherche à se venger de ceux qui ont causé la mort de sa meilleure amie, Min-hee. Dévastée par cette perte, Ok-ju plonge dans un parcours brutal pour traquer les responsables, dévoilant au passage sa nature impitoyable. Le film se caractérise par son ambiance sombre, ses visuels néon, et une bande-son percutante, contribuant à créer une atmosphère intense tout au long du récit",
     "imageUrl": "https://example.com/???.jpg"
 }
+
+### delete one
+DELETE {{baseUrl}}/films/1
+
+### update one
+PATCH {{baseUrl}}/films/2
+Content-Type: application/json
+
+{
+    "title":"Test"
+}
+
+### put one
+PUT {{baseUrl}}/films/2
+Content-Type: application/json
+
+{
+    "title":"TEST",
+    "director":"TEST2",
+    "duration": 25
+}
