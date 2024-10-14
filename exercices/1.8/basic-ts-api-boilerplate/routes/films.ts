@@ -1,9 +1,15 @@
 import { Router } from "express";
-import path from "node:path";
-import { Film, NewFilm } from "../types";
-import { parse, serialize } from "../utils/json";
-const jsonDbpath = path.join(__dirname, "/../data/films.json");
+import { NewFilm, Film } from "../types";
+import {
+  createFilm,
+  deleteFilm,
+  readAllFilms,
+  readOneFilms,
+  updateFilm
+} from "../services/films";
 const router = Router();
+
+//routes = s'occupe d'envoyer les requetes et de renvoyer
 
 const defaultFilms: Film[] = [
   {
@@ -40,27 +46,19 @@ const defaultFilms: Film[] = [
   },
 ];
 
+router.get("/", (req, res) => {
+  const minimumDuration = Number(req.query["minimum-duration"]);
+   const films = readAllFilms(minimumDuration);
+  return res.json(films);
+});
+
 router.get("/:id", (req, res) => {
-  const films = parse(jsonDbpath, defaultFilms);
   const id = Number(req.params.id);
-  const film = films.find((film) => film.id === id);
-  if (!film) {
+  const film = readOneFilms(id);
+  if(!film) {
     return res.sendStatus(404);
   }
   return res.json(film);
-});
-
-router.get("/", (req, res) => {
-  const films = parse(jsonDbpath, defaultFilms);
-
-  if (!req.query["minimum-duration"]) {
-    return res.json(films);
-  }
-  const minimumDuration = Number(req.query["minimum-duration"]);
-  const filteredFilms = films.filter((film) => {
-    return film.duration >= minimumDuration;
-  });
-  return res.json(filteredFilms);
 });
 
 router.post("/", (req, res) => {
@@ -90,31 +88,12 @@ router.post("/", (req, res) => {
     return res.sendStatus(400);
   }
 
-  const { title, director, duration, budget, description, imageUrl } = body as NewFilm;
+  const newFilm = body as NewFilm;
 
-  const films = parse(jsonDbpath, defaultFilms);
+  const film = createFilm(newFilm);
+  if (!film) return res.sendStatus(409);
 
-
-  const filmExist = films.find((film) => film.title === title && film.director === director);
-  if(filmExist) {
-    return res.sendStatus(409);
-  }
-
-  const nextId = films.reduce((maxId, film) => (film.id > maxId ? film.id : maxId), 0) + 1;
-
-  const NewFilm: Film = {
-    id: nextId,
-    title,
-    director,
-    duration,
-    budget,
-    description,
-    imageUrl
-  };
-
-  films.push(NewFilm);
-  serialize(jsonDbpath, defaultFilms);
-  return res.json(NewFilm);
+  return res.json(film);
 });
 
 router.delete("/:id", (req, res) => {
