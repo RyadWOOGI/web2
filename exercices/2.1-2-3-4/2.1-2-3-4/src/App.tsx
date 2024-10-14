@@ -32,18 +32,17 @@ const App = () => {
     </div>
   );
 };
- 
 
 const PageTitle = (props: { title: string }) => {
   return <h1>{props.title}</h1>;
 };
 
-interface Movie{
+interface Movie {
   title: string;
   director: string;
 }
 
-interface CinemaProps{
+interface CinemaProps {
   name: string;
   movie1: Movie;
   movie2: Movie;
@@ -54,6 +53,7 @@ const Cinema = (props: CinemaProps) => (
     <h2>{props.name}</h2>
     <ul>
       <li>
+        {" "}
         <strong>{props.movie1.title}</strong> - Réalisateur :{" "}
         {props.movie1.director}
       </li>
