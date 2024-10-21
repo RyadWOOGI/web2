@@ -1,3 +1,7 @@
+import PageTitle from "./Header/index";
+import User from "./Main/index";
+import Footer from "./Footer/index"
+
 const App = () => {
   const title = "Welcome to My App";
   const name1 = "Alice";
@@ -10,21 +14,12 @@ const App = () => {
 
   return (
     <div>
-      <PageTitle title={pageTitle}/>
-      <h1>{title}</h1>
-      <div>
-        <h2>{name1}</h2>
-        <p>Age: {age1}</p>
-      </div>
-      <div>
-        <h2>{name2}</h2>
-        <p>Age: {age2}</p>
-      </div>
-      <div>
-        <h2>{name3}</h2>
-        <p>Age: {age3}</p>
-      </div>
-      <footer>{footerText}</footer>
+      <PageTitle title={title} />
+
+      <User name={name1} age={age1}/>
+      <User name={name2} age={age2}/>
+      <User name={name3} age={age3}/>
+      <Footer footerText={footerText}/>
     </div>
   );
 };
