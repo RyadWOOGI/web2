@@ -1,11 +1,9 @@
-import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import ClickCounter from './ClickCounter'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -22,6 +20,7 @@ function App() {
         <ClickCounter
             title="Click Counter"
             message= "You are a master in the art of clicking !"
+            hoverMessage="Please click on me now!"
         />
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
