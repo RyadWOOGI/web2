@@ -5,6 +5,11 @@ interface Movie {
   imageUrl?: string;
   description?: string;
   budget?: number;
-}
+};
 
-export type { Movie };
+interface MovieContext {
+  movies: Movie[];
+  onMovieAdded: (movie: Movie) => void;
+};
+
+export type { Movie, MovieContext };
