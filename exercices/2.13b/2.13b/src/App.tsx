@@ -1,29 +1,22 @@
-import { useEffect, useState} from 'react'
+import { useState } from 'react'
 import './App.css'
+import RandomDog from './RandomDog'
 
 const App = () => {
-  const [joke, setJoke] = useState({ category: '', setup: '', delivery: '' });
-
-  useEffect(() => {
-    fetch('https://v2.jokeapi.dev/joke/Any?type=twopart')
-      .then((response) => {
-        if(!response.ok) {
-          throw new Error('Failed to fetch')
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setJoke({ category: data.category, setup: data.setup, delivery: data.delivery });
-      })
-      .catch((error) => console.error(error));
-  }, []);
+  const [refresh, setRefresh] = useState<boolean>(false);
 
   return (
-    <div className="App">
-      <h1>{joke.category}</h1>
-      <h2>{joke.setup}</h2>
-      <h3>{joke.delivery}</h3>
+    <>
+    <div style={{display: 'flex', justifyContent: 'center'}}>
+      <RandomDog key={`${refresh}1`} />
+      <RandomDog key={`${refresh}2`} />
+      <RandomDog key={`${refresh}3`} />
     </div>
+
+    <button onClick={() => setRefresh(!refresh)}>
+      Refresh Dogs
+    </button>
+    </>
   );
 }
 
