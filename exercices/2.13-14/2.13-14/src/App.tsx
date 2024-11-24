@@ -5,6 +5,7 @@ const App = () => {
   const [joke, setJoke] = useState({ category: '', setup: '', delivery: '' });
 
   useEffect(() => {
+    const interval = setInterval(() => {
     fetch('https://v2.jokeapi.dev/joke/Any?type=twopart')
       .then((response) => {
         if(!response.ok) {
@@ -16,6 +17,8 @@ const App = () => {
         setJoke({ category: data.category, setup: data.setup, delivery: data.delivery });
       })
       .catch((error) => console.error(error));
+    }, 10000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
