@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+
+.dog-images {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.dog-image {
+  width: 10px;
+  height: 10px;
+  object-fit: cover;
+}
